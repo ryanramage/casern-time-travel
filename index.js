@@ -6,15 +6,22 @@ module.exports = (config, statedb, reducers) => {
   let stateId = null
   let currentIndex = 0
 
-
   vorpal.command('prepare', 'prepare the db').action((args, cb) => {
     statedb.put(ddoc, (err, resp) => {
+      if (err) {
+        vorpal.log(err)
+        cb()
+      }
       vorpal.log(resp)
       cb()
     })
   })
   vorpal.command('list', 'list stateIds available').action((args, cb) => {
     statedb.query('timetravel/by_active', (err, resp) => {
+      if (err) {
+        vorpal.log(err)
+        cb()
+      }
       let ids = _.get(resp, 'rows', []).map(r => r.key)
       vorpal.log(ids)
       cb()

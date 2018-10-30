@@ -10,7 +10,7 @@ ddoc.views.by_active = {
     var parts = doc._id.split('|')
     parts.splice(-1)
     var id = parts.join('|')
-    emit(id, null)
+    emit(id, null) // eslint-disable-line
   }.toString()
 }
 
