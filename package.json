@@ -1,6 +1,6 @@
 {
   "name": "casern-time-travel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "utility for creating a time travel debugger for casern state",
   "main": "./index.js",
   "scripts": {

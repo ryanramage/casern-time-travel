@@ -134,6 +134,7 @@ function afterData (config, reducers, id, state, data, target, nextStateId, next
     vorpal.log('\n')
     vorpal.log('start state ----------')
     vorpal.log(`stateId: ${id}`)
+    printDate(id)
     vorpal.log(JSON.stringify(state))
     vorpal.log('\n')
     vorpal.log('applied data ---------')
@@ -147,6 +148,7 @@ function afterData (config, reducers, id, state, data, target, nextStateId, next
     if (nextStateId) {
       vorpal.log('db state -------------')
       vorpal.log(`stateId ${nextStateId}`)
+      printDate(nextStateId)
       vorpal.log(JSON.stringify(nextState))
       vorpal.log('\n')
     }
@@ -162,6 +164,7 @@ function show (config, statedb, stateId, currentIndex, cb) {
     if (err) return vorpal.log(err)
     vorpal.log('\n')
     vorpal.log(`stateId: ${resp.id}`)
+    printDate(resp.id)
     vorpal.log(JSON.stringify(resp.state))
     vorpal.log('\n')
     cb()
@@ -204,4 +207,11 @@ function baseQuery (stateId, currentIndex) {
     include_docs: true
   }
   return q
+}
+
+function printDate (_id) {
+  let d = Number(_id.split('|').pop())
+  console.log(d)
+  let dt = new Date(d).toString()
+  vorpal.log(dt)
 }
