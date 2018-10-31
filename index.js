@@ -162,6 +162,10 @@ function afterData (config, reducers, id, state, data, target, nextStateId, next
 function show (config, statedb, stateId, currentIndex, cb) {
   get(statedb, stateId, currentIndex, (err, resp) => {
     if (err) return vorpal.log(err)
+    if (!resp || !resp.id) {
+      vorpal.log('no state found')
+      return cb()
+    }
     vorpal.log('\n')
     vorpal.log(`stateId: ${resp.id}`)
     printDate(resp.id)
@@ -210,8 +214,8 @@ function baseQuery (stateId, currentIndex) {
 }
 
 function printDate (_id) {
+  if (!_id) return vorpal.log('no date')
   let d = Number(_id.split('|').pop())
-  console.log(d)
   let dt = new Date(d).toString()
   vorpal.log(dt)
 }
